@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensaje para Yepes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, #001f3f, #0074D9);
+            color: white;
+            position: relative;
+            overflow: hidden;
+            overflow-y: auto;
+        }
+        .sobre {
+            max-width: 600px;
+            width: 95%;
+            aspect-ratio: 16/9;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            margin: 20px auto;
+        }
+        .sobre.abierto {
+            height: auto;
+            aspect-ratio: unset;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+        }
+        .contenedor {
+            max-width: 1000px;
+            width: 90%;
+            padding: 2rem;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+            transform-origin: top;
+            transition: all 0.5s ease;
+            height: auto;
+            overflow-y: auto;
+            opacity: 0;
+            display: none;
+            max-height: 100vh;
+            margin: 0 auto;
+        }
+        .sobre.abierto .contenedor {
+            height: auto;
+            opacity: 1;
+            display: block;
+            padding-bottom: 50px;
+        }
+        .sobre-frente {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transition: all 0.5s ease;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        .sobre.abierto .sobre-frente {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+        .sobre-icono {
+            font-size: 3rem;
+            color: #7fdbff;
+            margin-bottom: 1rem;
+            animation: pulsar 2s infinite;
+        }
+        @keyframes pulsar {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .sobre-texto {
+            font-size: 1.2rem;
+            color: #7fdbff;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+        .fondo-decorativo {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+        .fondo-decorativo i {
+            position: absolute;
+            font-size: 3rem;
+            animation: flotar 6s infinite;
+        }
+        @keyframes flotar {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #7fdbff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        p {
+            font-size: 0.9rem;
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+        }
+        .iconos-decorativos {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 0.5rem 0;
+            font-size: 2rem;
+            color: #7fdbff;
+        }
+        .icono {
+            font-size: 1.5rem;
+            margin: 0.3rem 0;
+            color: #7fdbff;
+        }
+        .firma {
+            font-style: italic;
+            color: #7fdbff;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        .cita-biblica {
+            font-style: italic;
+            padding: 0.8rem;
+            border-left: 4px solid #7fdbff;
+            margin: 0.5rem 0;
+            text-align: left;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 0 15px 15px 0;
+            font-size: 0.9rem;
+        }
+        .instrucciones {
+            font-size: 0.8rem;
+            color: #7fdbff;
+            opacity: 0.8;
+        }
+        @media (min-width: 1024px) {
+            .sobre {
+                max-width: 800px;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            p {
+                font-size: 1.2rem;
+                line-height: 1.8;
+                margin-bottom: 1.5rem;
+            }
+            
+            .cita-biblica {
+                font-size: 1.1rem;
+                padding: 1.5rem;
+                margin: 2rem 0;
+            }
+            
+            .iconos-decorativos i {
+                font-size: 2.5rem;
+            }
+            
+            .sobre-icono {
+                font-size: 4rem;
+            }
+            
+            .sobre-texto {
+                font-size: 1.5rem;
+            }
+        }
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .sobre {
+                max-width: 600px;
+                aspect-ratio: 3/2;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            p {
+                font-size: 1.1rem;
+                line-height: 1.6;
+            }
+            
+            .cita-biblica {
+                font-size: 1rem;
+                padding: 1.2rem;
+            }
+        }
+        @media (max-width: 767px) {
+            body {
+                padding: 0;
+            }
+            
+            .sobre {
+                width: 100%;
+                aspect-ratio: 4/3;
+                margin: 0;
+            }
+            
+            .sobre.abierto {
+                margin: 0;
+                height: 100vh;
+                overflow-y: auto;
+                position: fixed;
+            }
+            
+            .contenedor {
+                padding: 1.2rem;
+                min-height: 100vh;
+                border-radius: 0;
+                overflow-y: auto;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+                margin: 1rem 0;
+            }
+            
+            p {
+                font-size: 1rem;
+                line-height: 1.5;
+                padding: 0 0.8rem;
+            }
+        }
+        @media (max-width: 380px) {
+            .sobre {
+                width: 95%;
+                aspect-ratio: 1/1;
+            }
+            
+            h1 {
+                font-size: 1.6rem;
+            }
+            
+            p {
+                font-size: 0.95rem;
+                padding: 0 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sobre" onclick="this.classList.toggle('abierto')">
+        <div class="sobre-frente">
+            <i class="fas fa-envelope sobre-icono"></i>
+            <div class="sobre-texto">Toca para abrir el mensaje</div>
+            <div class="instrucciones">(Toca nuevamente para cerrar)</div>
+        </div>
+        <div class="contenedor">
+            <div class="fondo-decorativo">
+                <i class="fas fa-cross" style="top: 10%; left: 10%;"></i>
+                <i class="fas fa-dove" style="top: 30%; right: 15%;"></i>
+                <i class="fas fa-pray" style="bottom: 20%; left: 20%;"></i>
+                <i class="fas fa-heart" style="bottom: 30%; right: 10%;"></i>
+            </div>
+            <div class="icono">
+                <i class="fas fa-cross"></i>
+            </div>
+            <h1>Para Yepes</h1>
+            <div class="iconos-decorativos">
+                <i class="fas fa-dove"></i>
+                <i class="fas fa-pray"></i>
+                <i class="fas fa-heart"></i>
+            </div>
+            <p>
+                En este camino de la vida, recuerda que cada paso tiene un propósito divino. 
+                Que la luz de Dios ilumine tu sendero y te guíe hacia tus metas más elevadas.
+            </p>
+            <div class="cita-biblica">
+                <i class="fas fa-quote-left" style="margin-right: 10px;"></i>
+                "Porque yo sé los planes que tengo para ti", declara el Señor, 
+                "planes de prosperidad y no de calamidad, para darte un futuro y una esperanza."
+                <br>- Jeremías 29:11
+            </div>
+            <p>
+                Que encuentres en cada momento la conexión perfecta con Dios, 
+                pues Él es la clave que abre todas las puertas y el fundamento 
+                que sostiene nuestros sueños.
+            </p>
+            <div class="firma">
+                <i class="fas fa-heart" style="margin-right: 10px;"></i>
+                Con aprecio,<br>
+                Andrés Hincapié
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('.sobre').onclick = function() {
+            this.classList.toggle('abierto');
+        };
+    </script>
+</body>
+</html>
